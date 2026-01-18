@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { faqs } from "./faq";
+import Layout from "./Layout";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Landingpage = () => {
     const [openIndex, setOpenIndex] = useState(null);
     return (
+        <Layout header={<Header />} footer={<Footer />}>
         <div className="w-full flex flex-col justify-center md:px-8 px-4 md:mt-28 mt-12 pb-8 md:gap-24 gap-8 overflow-x-hidden">
-            {/* first */}
             <div className="hidden md:flex w-full justify-between h-[284px]">
-                {/* LEFT */}
                 <div className="flex flex-col w-full h-full">
                     <p className="m-0 text-blue-700 font-semibold text-5xl leading-[72px]">
                         Build your store
@@ -24,9 +26,6 @@ const Landingpage = () => {
                         built for Africa's reality.
                     </p>
                     <div className="flex items-center gap-4 mt-auto">
-                        {/* <button className='flex items-center rounded-full border p-3 bg-blue-700 text-white text-sm font-normal'>
-                Join the waitlist
-            </button> */}
                         <a
                             href="https://forms.gle/AjVVcvZmXzhDAQuq7"
                             target="_blank"
@@ -41,7 +40,6 @@ const Landingpage = () => {
                         </button>
                     </div>
                 </div>
-                {/* RIGHT */}
                 <div className="flex flex-col w-full h-full relative">
                     <img
                         src="./cart.svg"
@@ -88,7 +86,7 @@ const Landingpage = () => {
                 </div>
             </div>
 
-            {/* ========= MOBILE ======== */}
+            {/*MOBILE*/}
             <div className="md:hidden flex flex-col-reverse items-center justify-center w-full h-full">
                 <div className="flex flex-col w-full h-full items-center justify-center">
                     <p className="m-0 text-blue-700 font-semibold text-3xl leading-[24px] text-center">
@@ -118,7 +116,6 @@ const Landingpage = () => {
                         </button>
                     </div>
                 </div>
-                {/* RIGHT */}
                 <div className="flex flex-col w-full h-full relative">
                     <img
                         src="./shopping.svg"
@@ -164,7 +161,6 @@ const Landingpage = () => {
                     </div>
                 </div>
             </div>
-            {/* second */}
             <div className="flex flex-col w-full gap-2 items-center justify-center md:items-start md:justify-start">
                 <p className="m-0 text-slate-800 font-medium text-sm">
                     Trusted by top companies
@@ -207,7 +203,6 @@ const Landingpage = () => {
                     />
                 </div>
             </div>
-            {/* third */}
             <div className="md:flex w-full md:justify-between justify-center h-full gap-8 items-stretch">
                 <div className="flex flex-col md:gap-3 gap-1 mb-8">
                     <img
@@ -252,7 +247,6 @@ const Landingpage = () => {
                     </p>
                 </div>
             </div>
-            {/* fourth */}
             <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
                 <div className="flex items-center justify-center bg-[#D99426]/11 py-8">
                     <div className="flex flex-col items-start md:items-center justify-center w-full max-w-6xl md:gap-3 gap-1 px-4 md:px-8">
@@ -272,7 +266,6 @@ const Landingpage = () => {
                     </div>
                 </div>
             </div>
-            {/* fifth */}
             <div className="hidden md:flex w-full h-full items-stretch">
                 <img
                     src="waitlist.svg"
@@ -302,15 +295,13 @@ const Landingpage = () => {
                 </div>
             </div>
 
-            {/* ======MOBILE===== */}
-            {/* fifth */}
+            {/* MOBILE*/}
             <div className="md:hidden relative flex w-full min-h-[300px] items-stretch bg-gray-100 rounded-lg overflow-hidden">
                 <img
                     src="waitlist.svg"
                     alt="People waiting for early access"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
-                {/* Dark overlay + content */}
                 <div className="relative z-10 flex flex-col justify-end bg-black/50 p-4 gap-3">
                     <h2 className="text-white font-semibold text-xl leading-tight">
                         Be first to experience the future of selling online
@@ -332,13 +323,11 @@ const Landingpage = () => {
                     </div>
                 </div>
             </div>
-            {/* sixth */}
             <div className="flex w-full flex-col gap-8">
                 <h2 className="text-3xl font-semibold text-slate-800">FAQs</h2>
 
                 {faqs.map((faq, index) => (
                     <div key={index} className="w-full">
-                        {/* Clickable Row */}
                         <div
                             onClick={() =>
                                 setOpenIndex(openIndex === index ? null : index)
@@ -355,8 +344,6 @@ const Landingpage = () => {
                                 <ChevronDown size={16} color="#606060" />
                             )}
                         </div>
-
-                        {/* Dropdown Content */}
                         {openIndex === index && (
                             <p className="text-slate-600 text-sm mt-3 leading-relaxed">
                                 {faq.answer}
@@ -365,7 +352,6 @@ const Landingpage = () => {
                     </div>
                 ))}
             </div>
-            {/* seventh */}
             <div className="flex flex-col w-full items-center justify-center gap-6">
                 <div className="w-full flex flex-col text-center gap-4">
                     <p className="m-0 text-slate-700 font-semibold text-2xl">
@@ -380,7 +366,6 @@ const Landingpage = () => {
                 </div>
                 <div className="w-full flex justify-center">
                     <div className="flex items-center justify-center gap-2 md:gap-6 max-w-md w-full">
-                        {/* Google Play */}
                         <div className="flex items-center gap-2 p-2 shadow-xl rounded-lg bg-slate-900 min-w-[140px] flex-1">
                             <img
                                 src="playstore.svg"
@@ -396,8 +381,6 @@ const Landingpage = () => {
                                 </p>
                             </div>
                         </div>
-
-                        {/* Apple Store */}
                         <div className="flex items-center gap-2 p-2 shadow-xl rounded-lg bg-slate-900 min-w-[140px] flex-1">
                             <img
                                 src="apple.svg"
@@ -417,6 +400,7 @@ const Landingpage = () => {
                 </div>
             </div>
         </div>
+        </Layout>
     );
 };
 
