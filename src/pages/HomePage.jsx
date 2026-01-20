@@ -71,7 +71,7 @@ const HomePage = () => {
                         <OrderTrendCard />
                         <TopSellingProductsCard />
                     </div>
-                    <div className="flex flex-col w-full mb-6">
+                    <div className="hidden md:flex-col w-full mb-6">
                         <h3 className="text-black text-sm font-bold">
                         AI Insight
                     </h3>
@@ -95,7 +95,7 @@ const HomePage = () => {
                          <h3 className="text-black text-sm font-bold">
                         Next step
                     </h3>
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex md:flex-row flex-col-reverse items-center justify-between w-full">
                         <div className="flex flex-col bg-slate-50 gap-2">
                             <h3 className="text-black font-bold text-sm">Add a product</h3>
                             <p className="m-0 text-black font-sm font-normal">Expand your offerings and reach more customers.</p>
@@ -103,7 +103,7 @@ const HomePage = () => {
                         </div>
                         <img src="/addproduct.svg" alt="Next step" className="w-60 h-40 mt-4 rounded-2xl"/>
                         </div>
-                        <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center justify-between w-full md:flex-row flex-col-reverse">
                         <div className="flex flex-col bg-slate-50 gap-2">
                             <h3 className="text-black font-bold text-sm">Set up Delivery</h3>
                             <p className="m-0 text-black font-sm font-normal">Ensure smooth and timely delivery for your customers.</p>
@@ -111,7 +111,7 @@ const HomePage = () => {
                         </div>
                         <img src="/set1.svg" alt="Next step" className="w-60 h-40 mt-4 rounded-2xl"/>
                         </div>
-                        <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center justify-between w-full md:flex-row flex-col-reverse">
                         <div className="flex flex-col bg-slate-50">
                             <h3 className="text-black font-bold text-sm">View Analytics</h3>
                             <p className="m-0 text-black font-sm font-normal">Gain deeper insights into your business performance.</p>
