@@ -1,15 +1,16 @@
 import React, {useState } from "react";
 import { ChevronDown, ChevronUp} from "lucide-react";
 import { getLocationData, locations } from "./data";
+import { formatCurrency, formatPercentage } from "../utils/formatters";
 
 const RevenueCard = ({ title, actual, target, percentage, bgColor, borderColor }) => {
   return (
     <div className="p-6 rounded-lg border w-full md:w-1/3" style={{ backgroundColor: bgColor, borderColor: borderColor }}>
       <h3 className="text-gray-600 text-sm font-medium">{title}</h3>
-      <p className="text-2xl font-bold mt-2">₦{actual.toLocaleString(undefined, {maximumFractionDigits: 2})} <span className="text-gray-500 font-normal text-sm">Actual</span></p>
-      <p className="text-gray-600 font-bold text-sm mt-1">₦{target.toLocaleString(undefined, {maximumFractionDigits: 2})} <span className="text-gray-500 font-normal text-sm">Target</span></p>
+      <p className="text-2xl font-bold mt-2">{formatCurrency(actual)} <span className="text-gray-500 font-normal text-sm">Actual</span></p>
+      <p className="text-gray-600 font-bold text-sm mt-1">{formatCurrency(target)} <span className="text-gray-500 font-normal text-sm">Target</span></p>
       <button className={`mt-4 ${percentage >= 0 ? 'bg-green-500' : 'bg-red-500'} text-white text-sm font-semibold px-3 py-1 rounded-md w-full items-center justify-center text-center`}>
-        {percentage >= 0 ? '↑' : '↓'} {Math.abs(percentage).toFixed(1)}% Vs Target
+        {percentage >= 0 ? '↑' : '↓'} {formatPercentage(Math.abs(percentage))} Vs Target
       </button>
     </div>
   );
@@ -27,12 +28,12 @@ const RevenuePerformance = ({ selectedLocation }) => {
   const data = locationData[selected] || locationData["Omole"];
   
   // Calculate percentages
-  const dailyPercentage = ((data.dailyActual - data.dailyTarget) / data.dailyTarget) * 100;
-  const weeklyPercentage = ((data.weeklyActual - data.weeklyTarget) / data.weeklyTarget) * 100;
+  const dailyPercentage = ((data?.dailyActual - data?.dailyTarget) / data?.dailyTarget) * 100;
+  const weeklyPercentage = ((data?.weeklyActual - data?.weeklyTarget) / data?.weeklyTarget) * 100;
   
   // Previous week data (using 90% of current as example)
-  const prevWeekActual = data.weeklyActual * 0.9;
-  const weekOnWeekPercentage = ((data.weeklyActual - prevWeekActual) / prevWeekActual) * 100;
+  const prevWeekActual = data?.weeklyActual * 0.9;
+  const weekOnWeekPercentage = ((data?.weeklyActual - prevWeekActual) / prevWeekActual) * 100;
   return (
     <div className="p-4 md:p-6 space-y-6 bg-white shadow-lg rounded-xl mx-4 md:mx-6">
       <div className="flex flex-col md:flex-row w-full md:justify-between md:items-center gap-4">
@@ -82,23 +83,23 @@ const RevenuePerformance = ({ selectedLocation }) => {
       <div className="flex flex-col md:flex-row gap-6">
         <RevenueCard
           title="Daily (Today)"
-          actual={data.dailyActual}
-          target={data.dailyTarget}
+          actual={data?.dailyActual}
+          target={data?.dailyTarget}
           percentage={dailyPercentage}
           bgColor="#ffe3e3"
           borderColor="#ffcccc"
         />
         <RevenueCard
           title="Weekly (Current)"
-          actual={data.weeklyActual}
-          target={data.weeklyTarget}
+          actual={data?.weeklyActual}
+          target={data?.weeklyTarget}
           percentage={weeklyPercentage}
           bgColor="#fffdeb"
           borderColor="#fff4c2"
         />
         <RevenueCard
           title="Week-On-Week"
-          actual={data.weeklyActual}
+          actual={data?.weeklyActual}
           target={prevWeekActual}
           percentage={weekOnWeekPercentage}
           bgColor="#f5f5f5"

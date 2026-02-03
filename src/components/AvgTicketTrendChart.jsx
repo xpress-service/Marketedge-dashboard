@@ -11,8 +11,7 @@ import {
 } from "recharts";
 import { ChevronDown, ChevronUp} from "lucide-react";
 import { generateAvgTicketData, locations, getLocationData } from "./data";
-
-const currencyFormatter = (value) => `₦${value.toLocaleString()}`;
+import { formatCurrency } from "../utils/formatters";
 
 const AvgTicketTrendChart = ({ selectedLocation }) => {
    const [open, setOpen] = useState(false);
@@ -87,14 +86,14 @@ const AvgTicketTrendChart = ({ selectedLocation }) => {
               label={{ value: 'Days of the week', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#64748b' } }}
             />
             <YAxis
-              tickFormatter={currencyFormatter}
+              tickFormatter={(value) => formatCurrency(value, 0)}
               tick={{ fontSize: 10, fill: "#64748b" }}
               axisLine={false}
               tickLine={false}
               label={{ value: 'Ticket value', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#64748b' } }}
             />
             <Tooltip
-              formatter={(value) => currencyFormatter(value)}
+              formatter={(value) => formatCurrency(value, 0)}
               contentStyle={{ fontSize: 12 }}
             />
             <Legend

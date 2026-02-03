@@ -51,19 +51,23 @@ export const loadLocationData = async () => {
     // Transform API data to match our frontend structure
     const transformedData = {};
     
+    // Map Google Sheets location names (ALL CAPS) to frontend names
+    const locationMapping = {
+      'OMOLE': 'Omole',
+      'GWARIMPA-ABUJA': 'Gwarimpa-Abuja',
+      'TRANS AMADI PORTHARCOURT': 'Trans Amadi Portharcourt',
+      'AWOLOWO RD 2': 'Awolowo Rd 2',
+      'JOEL OGUNNAIKE': 'Joel Ogunnaike'
+    };
+    
     Object.keys(apiData).forEach((key) => {
       const location = apiData[key];
-      // Map location names (handle case differences)
-      let locationName = location.location;
+      const locationName = location.location;
       
-      // Normalize location names
-      if (locationName.toUpperCase() === "OMOLE") locationName = "Omole";
-      if (locationName.toUpperCase() === "GWARIMPA-ABUJA") locationName = "Gwarimpa-Abuja";
-      if (locationName.toUpperCase() === "TRANS AMADI PORTHARCOURT") locationName = "Trans Amadi Portharcourt";
-      if (locationName.toUpperCase() === "AWOLOWO RD 2") locationName = "Awolowo Rd 2";
-      if (locationName.toUpperCase() === "JOEL OGUNNAIKE") locationName = "Joel Ogunnaike";
+      // Use the mapped name or fallback to original
+      const mappedName = locationMapping[locationName] || locationName;
       
-      transformedData[locationName] = {
+      transformedData[mappedName] = {
         weeklyTarget: location.weeklyTarget || 0,
         weeklyActual: location.weeklyActual || 0,
         dailyTarget: location.dailyTarget || 0,
@@ -74,6 +78,7 @@ export const loadLocationData = async () => {
     // Update the locationData object
     locationData = { ...transformedData };
     
+    console.log('✓ Data loaded from backend:', Object.keys(locationData));
     return locationData;
   } catch (error) {
     console.error('Failed to load location data from API, using default data:', error);

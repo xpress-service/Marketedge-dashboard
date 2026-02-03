@@ -10,8 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { generateTrendData, locations, getLocationData } from "./data";
-
-const formatCurrency = (value) => `₦${(value / 1_000_000).toFixed(0)}M`;
+import { formatCurrencyMillions } from "../utils/formatters";
 
 const RevenueTrendChart = ({ selectedLocation }) => {
   const [open, setOpen] = useState(false);
@@ -85,14 +84,14 @@ const RevenueTrendChart = ({ selectedLocation }) => {
               label={{ value: 'Days of the week', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#6B7280' } }}
             />
             <YAxis
-              tickFormatter={formatCurrency}
+              tickFormatter={formatCurrencyMillions}
               tick={{ fill: "#6B7280", fontSize: 10 }}
               axisLine={false}
               tickLine={false}
               label={{ value: 'Revenue', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#6B7280' } }}
             />
             <Tooltip
-              formatter={(value) => formatCurrency(value)}
+              formatter={(value) => formatCurrencyMillions(value)}
               contentStyle={{ fontSize: 12 }}
             />
             <Legend verticalAlign="top"

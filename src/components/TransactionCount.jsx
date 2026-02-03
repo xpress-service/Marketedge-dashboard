@@ -1,15 +1,16 @@
 import React, {useState } from "react";
 import { ChevronDown, ChevronUp} from "lucide-react";
 import { getLocationData, locations } from "./data";
+import { formatNumber, formatPercentage } from "../utils/formatters";
 
 const TransactionCard = ({ title, actual, target, percentage, bgColor }) => {
   return (
     <div className={`p-6 rounded-lg border ${bgColor} w-full md:w-1/3`}>
       <h3 className="text-gray-600 text-sm font-medium">{title}</h3>
-      <p className="text-2xl font-bold mt-2">{actual.toLocaleString(undefined, {maximumFractionDigits: 0})} <span className="text-gray-500 font-normal text-sm">Actual</span></p>
-      <p className="text-gray-600 font-bold text-sm mt-1">₦{target.toLocaleString(undefined, {maximumFractionDigits: 0})} <span className="text-gray-500 font-normal text-sm">Target</span></p>
+      <p className="text-2xl font-bold mt-2">{formatNumber(actual)} <span className="text-gray-500 font-normal text-sm">Actual</span></p>
+      <p className="text-gray-600 font-bold text-sm mt-1">{formatNumber(target)} <span className="text-gray-500 font-normal text-sm">Target</span></p>
       <button className={`mt-4 ${percentage >= 0 ? 'bg-green-500' : 'bg-red-500'} text-white text-sm font-semibold px-3 py-1 rounded-md w-full items-center justify-center text-center`}>
-        {percentage >= 0 ? '↑' : '↓'} {Math.abs(percentage).toFixed(1)}% Vs Target
+        {percentage >= 0 ? '↑' : '↓'} {formatPercentage(Math.abs(percentage))} Vs Target
       </button>
     </div>
   );
@@ -27,10 +28,10 @@ const TransactionCount = ({ selectedLocation }) => {
    const data = locationData[selected] || locationData["Omole"];
    
    // Estimate transactions (assuming avg transaction value of ~500 Naira)
-   const dailyTransactionsActual = Math.round(data.dailyActual / 500);
-   const dailyTransactionsTarget = Math.round(data.dailyTarget / 500);
-   const weeklyTransactionsActual = Math.round(data.weeklyActual / 500);
-   const weeklyTransactionsTarget = Math.round(data.weeklyTarget / 500);
+   const dailyTransactionsActual = Math.round(data?.dailyActual / 500);
+   const dailyTransactionsTarget = Math.round(data?.dailyTarget / 500);
+   const weeklyTransactionsActual = Math.round(data?.weeklyActual / 500);
+   const weeklyTransactionsTarget = Math.round(data?.weeklyTarget / 500);
    
    // Calculate percentages
    const dailyPercentage = ((dailyTransactionsActual - dailyTransactionsTarget) / dailyTransactionsTarget) * 100;

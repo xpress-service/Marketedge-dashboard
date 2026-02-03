@@ -14,7 +14,7 @@ const CustomerCaptureCard = ({ selectedLocation }) => {
    const data = locationData[selected] || locationData["Omole"];
    
    // Calculate customer capture metrics
-   const weeklyTransactions = Math.round(data.weeklyActual / 500);
+   const weeklyTransactions = Math.round(data?.weeklyActual / 500);
    const captureRate = 87.1; // Example capture rate
    const dataCaptured = Math.round(weeklyTransactions * (captureRate / 100));
    const targetRate = 85;
