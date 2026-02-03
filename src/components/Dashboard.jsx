@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  // Fetch data from API on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,7 +46,7 @@ const Dashboard = () => {
     );
   }
   return (
-    <div className='flex flex-col gap-10'>
+    <div className='flex flex-col gap-10 overflow-x-hidden mb-10'>
     {error && (
       <div className="mx-6 mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
         <p className="text-yellow-800 text-sm"> {error}</p>
